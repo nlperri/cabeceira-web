@@ -37,7 +37,7 @@ const FormLogin = ({ emmitErrorToast }: FormLoginProps) => {
   return (
     <form
       onSubmit={handleSubmit(handleLogin)}
-      className="flex flex-col items-center w-full pl-8 gap-6"
+      className="flex flex-col items-center w-full sm:pl-8 gap-6"
     >
       <input
         className="border h-11 border-gray-300 rounded-md w-full min-w-[300px] max-w-[430px] pl-2 outline-none"

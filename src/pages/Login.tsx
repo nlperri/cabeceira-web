@@ -7,14 +7,14 @@ const Login = () => {
   const { emmitErrorToast, Toast } = useToast();
 
   return (
-    <div className="relative font-sans h-screen flex justify-center items-center">
-      <div className="w-[50%] flex flex-col items-center">
+    <div className="font-sans h-screen flex justify-center items-center min-sm:w-full">
+      <div className="w-[50%] flex flex-col items-center ">
         <Logo />
         <FormLogin emmitErrorToast={emmitErrorToast} />
-        <span className="relative left-5 top-5">
+        <span className="sm:pl-6 min-w-full text-center mt-6 w-[250px]">
           Não possui uma conta?
           <Link
-            className="ml-1 text-pink-salmon hover:text-dark-blue"
+            className="ml-2 text-pink-salmon hover:text-dark-blue"
             to="/register"
           >
             Criar
