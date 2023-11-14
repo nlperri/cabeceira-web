@@ -1,0 +1,6 @@
+@import url("https://fonts.googleapis.com/css2?family=Antonio:wght@100;400;700&family=Corben:wght@400;700&family=Italiana&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Antonio:wght@100;400;700&family=Content:wght@400;700&family=Corben:wght@400;700&family=Italiana&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
