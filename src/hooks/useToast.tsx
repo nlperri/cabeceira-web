@@ -1,32 +1,35 @@
 import { toast } from "react-toastify";
 import Toast from "../components/Toast";
 
-export function useToast() {
+export const useToast = () => {
   const emmitErrorToast = (
     message: string = "oooops...",
     duration: number = 500
   ) => {
-    toast.error(message, {
+    return toast(message, {
       type: "error",
-      data: {
-        message,
-        duration,
-      },
+      position: "top-right",
+      autoClose: duration,
+      closeOnClick: true,
+      pauseOnHover: false,
       draggable: true,
+      progress: undefined,
+      theme: "light",
     });
   };
-
   const emmitSuccessToast = (
-    message: string = "success...",
+    message: string = "oooops...",
     duration: number = 500
   ) => {
-    toast.success(message, {
+    return toast(message, {
       type: "success",
-      data: {
-        message,
-        duration,
-      },
+      position: "top-right",
+      autoClose: duration,
+      closeOnClick: true,
+      pauseOnHover: false,
       draggable: true,
+      progress: undefined,
+      theme: "light",
     });
   };
 
@@ -35,4 +38,4 @@ export function useToast() {
     Toast,
     emmitSuccessToast,
   };
-}
+};

@@ -2,11 +2,13 @@ import { z } from "zod";
 import Button from "./Button";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useToast } from "../hooks/useToast";
+import { Id } from "react-toastify";
 
-const FormLogin = () => {
-  const { emmitErrorToast, Toast } = useToast();
+interface FormLoginProps {
+  emmitErrorToast: (message: string, duration: number) => Id;
+}
 
+const FormLogin = ({ emmitErrorToast }: FormLoginProps) => {
   const loginFormSchema = z.object({
     email: z.string().email(),
     password: z.string().min(8),
@@ -25,7 +27,7 @@ const FormLogin = () => {
 
   async function handleLogin(data: loginFormInputs) {
     try {
-      console.log(data);
+      throw new Error();
     } catch (error) {
       reset();
       emmitErrorToast("Email ou senha incorretos", 1000);
@@ -38,7 +40,7 @@ const FormLogin = () => {
       className="flex flex-col items-center w-full pl-8 gap-6"
     >
       <input
-        className="border h-11 border-gray-300 rounded-md w-[65%] pl-2 outline-none"
+        className="border h-11 border-gray-300 rounded-md w-full min-w-[300px] max-w-[430px] pl-2 outline-none"
         type="email"
         placeholder="Email"
         required
@@ -46,7 +48,7 @@ const FormLogin = () => {
         {...register("email")}
       />
       <input
-        className="border h-11  border-gray-300 rounded-md w-[65%] pl-2 outline-none"
+        className="border h-11 w-full min-w-[300px] max-w-[430px] border-gray-300 rounded-md pl-2 outline-none"
         type="password"
         placeholder="Senha"
         required
@@ -54,20 +56,16 @@ const FormLogin = () => {
         {...register("password")}
       />
 
-      {/* <a href="" className="w-full text-start">
-        Esqueci minha senha
-      </a> */}
-
       {isSubmitting ? (
         <Button
-          className="border border-pink-salmon rounded-md w-[65%] h-11 text-pink-salmon hover:bg-pink-salmon hover:text-white transition ease-in-out delay-50"
+          className="border w-full min-w-[300px] max-w-[430px] border-pink-salmon rounded-md  h-11 text-pink-salmon hover:bg-pink-salmon hover:text-white transition ease-in-out delay-50"
           type="submit"
           content="Acessar"
           disabled={true}
         />
       ) : (
         <Button
-          className="border border-pink-salmon rounded-md w-[65%] h-11 text-pink-salmon hover:bg-pink-salmon hover:text-white transition ease-in-out delay-50"
+          className="border w-full min-w-[300px] max-w-[430px] border-pink-salmon rounded-md  h-11 text-pink-salmon hover:bg-pink-salmon hover:text-white transition ease-in-out delay-50"
           type="submit"
           content="Acessar"
         />
