@@ -3,12 +3,19 @@ import Button from "./Button";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Id } from "react-toastify";
+import { useLogin } from "../hooks/useLogin";
+import { useCookies } from "react-cookie";
+import { useNavigate } from "react-router-dom";
 
 interface FormLoginProps {
   emmitErrorToast: (message: string, duration: number) => Id;
 }
 
 const FormLogin = ({ emmitErrorToast }: FormLoginProps) => {
+  const { login } = useLogin();
+  const [, setCookie] = useCookies(["token"]);
+  const navigate = useNavigate();
+
   const loginFormSchema = z.object({
     email: z.string().email(),
     password: z.string().min(8),
@@ -27,7 +34,10 @@ const FormLogin = ({ emmitErrorToast }: FormLoginProps) => {
 
   async function handleLogin(data: loginFormInputs) {
     try {
-      throw new Error();
+      const response = await login(data);
+      console.log(response.token);
+      setCookie("token", "Bearer " + response.token);
+      navigate("/home");
     } catch (error) {
       reset();
       emmitErrorToast("Email ou senha incorretos", 1000);
