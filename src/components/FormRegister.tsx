@@ -5,6 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Id } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { useRegister } from "../hooks/useRegister";
+import { AxiosError } from "axios";
 
 interface FormRegisterProps {
   emmitErrorToast: (message: string, duration: number) => Id;
@@ -51,7 +52,7 @@ const FormRegister = ({ emmitErrorToast }: FormRegisterProps) => {
         emmitErrorToast("Senhas não conferem", 1000);
         return;
       }
-      registerUser({
+      await registerUser({
         email: data.email,
         name: data.name,
         lastName: data.lastName,
@@ -59,7 +60,12 @@ const FormRegister = ({ emmitErrorToast }: FormRegisterProps) => {
       });
       navigate("/login");
     } catch (error) {
-      emmitErrorToast("Email ou senha incorretos", 1000);
+      if(error instanceof AxiosError){
+        emmitErrorToast(error.response?.data, 1000);
+      }else{
+        emmitErrorToast("Email ou senha incorretos", 1000);
+
+      }
     }
   }
 
