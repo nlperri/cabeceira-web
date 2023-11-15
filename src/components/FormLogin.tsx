@@ -26,11 +26,16 @@ const FormLogin = ({ emmitErrorToast }: FormLoginProps) => {
   const {
     register,
     handleSubmit,
-    formState: { isSubmitting },
+    formState: { errors },
     reset,
   } = useForm<loginFormInputs>({
     resolver: zodResolver(loginFormSchema),
   });
+
+  function handleErrors() {
+    Object.keys(errors).length > 0 &&
+      emmitErrorToast("Email ou senha inválido", 1000);
+  }
 
   async function handleLogin(data: loginFormInputs) {
     try {
@@ -40,7 +45,7 @@ const FormLogin = ({ emmitErrorToast }: FormLoginProps) => {
       navigate("/home");
     } catch (error) {
       reset();
-      emmitErrorToast("Email ou senha incorretos", 1000);
+      emmitErrorToast("Email ou senha inválido", 1000);
     }
   }
 
@@ -66,20 +71,12 @@ const FormLogin = ({ emmitErrorToast }: FormLoginProps) => {
         {...register("password")}
       />
 
-      {isSubmitting ? (
-        <Button
-          className="border w-full min-w-[300px] max-w-[430px] border-pink-salmon rounded-md  h-11 text-pink-salmon hover:bg-pink-salmon hover:text-white transition ease-in-out delay-50"
-          type="submit"
-          content="Acessar"
-          disabled={true}
-        />
-      ) : (
-        <Button
-          className="border w-full min-w-[300px] max-w-[430px] border-pink-salmon rounded-md  h-11 text-pink-salmon hover:bg-pink-salmon hover:text-white transition ease-in-out delay-50"
-          type="submit"
-          content="Acessar"
-        />
-      )}
+      <Button
+        onClick={() => handleErrors()}
+        className="border w-full min-w-[300px] max-w-[430px] border-pink-salmon rounded-md  h-11 text-pink-salmon hover:bg-pink-salmon hover:text-white transition ease-in-out delay-50"
+        type="submit"
+        content="Acessar"
+      />
     </form>
   );
 };
