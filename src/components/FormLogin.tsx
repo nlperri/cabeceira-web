@@ -27,7 +27,6 @@ const FormLogin = ({ emmitErrorToast }: FormLoginProps) => {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm<loginFormInputs>({
     resolver: zodResolver(loginFormSchema),
   });
@@ -44,7 +43,6 @@ const FormLogin = ({ emmitErrorToast }: FormLoginProps) => {
       setCookie("token", "Bearer " + response.token);
       navigate("/home");
     } catch (error) {
-      reset();
       emmitErrorToast("Email ou senha inválido", 1000);
     }
   }

@@ -3,10 +3,12 @@ import App from "../App";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 
+import { AuthenticatedRoute } from "./AuthenticatedRoute";
+
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <AuthenticatedRoute element={<App />} />,
   },
   {
     path: "/login",
