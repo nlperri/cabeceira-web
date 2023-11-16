@@ -10,7 +10,6 @@ export class UserDetailsService {
         Authorization: token,
       },
     });
-
     return response.data;
   }
 }

@@ -8,10 +8,8 @@ export class FetchBooksService {
     const response = await api.get<UserBookDetails[]>(this.bookshelfUrl, {
       headers: {
         Authorization: token,
-        
       },
     });
-
     return response.data;
   }
 }

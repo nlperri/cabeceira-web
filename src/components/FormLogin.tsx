@@ -39,7 +39,6 @@ const FormLogin = ({ emmitErrorToast }: FormLoginProps) => {
   async function handleLogin(data: loginFormInputs) {
     try {
       const response = await login(data);
-      console.log(response.token);
       setCookie("token", "Bearer " + response.token);
       navigate("/");
     } catch (error) {
