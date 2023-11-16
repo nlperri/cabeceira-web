@@ -1,22 +1,22 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import App from "../App";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
+import Home from "../pages/Home";
 
-import { AuthenticatedRoute } from "./AuthenticatedRoute";
+import { AuthenticatedRoute, NotAuthenticatedRoute } from "./AuthenticationRoutes";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <AuthenticatedRoute element={<App />} />,
+    element: <AuthenticatedRoute element={<Home/>} />,
   },
   {
     path: "/login",
-    element: <Login />,
+    element: <NotAuthenticatedRoute element={<Login />}/>,
   },
   {
     path: "/register",
-    element: <Register />,
+    element: <NotAuthenticatedRoute element={<Register />}/>,
   },
 ]);
 

@@ -6,7 +6,7 @@ interface AuthenticatedRouteProps {
   element: ReactNode;
 }
 
-export const AuthenticatedRoute: React.FC<AuthenticatedRouteProps> = ({
+const AuthenticatedRoute: React.FC<AuthenticatedRouteProps> = ({
   element,
 }) => {
   const navigate = useNavigate();
@@ -21,3 +21,24 @@ export const AuthenticatedRoute: React.FC<AuthenticatedRouteProps> = ({
 
   return element;
 };
+
+const NotAuthenticatedRoute: React.FC<AuthenticatedRouteProps> = ({
+  element,
+}) => {
+  const navigate = useNavigate();
+  const { isAuthenticated, isLoading } = useAuthentication();
+
+  useEffect(() => {
+    if (isLoading) return;
+    if (isAuthenticated) {
+      navigate("/");
+    }
+  }, [isAuthenticated, navigate, isLoading]);
+
+  return element;
+};
+
+export {
+  AuthenticatedRoute,
+  NotAuthenticatedRoute
+}

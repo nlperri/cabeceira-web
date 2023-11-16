@@ -41,7 +41,7 @@ const FormLogin = ({ emmitErrorToast }: FormLoginProps) => {
       const response = await login(data);
       console.log(response.token);
       setCookie("token", "Bearer " + response.token);
-      navigate("/home");
+      navigate("/");
     } catch (error) {
       emmitErrorToast("Email ou senha inválido", 1000);
     }
