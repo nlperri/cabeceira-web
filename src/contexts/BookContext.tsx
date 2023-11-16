@@ -35,7 +35,7 @@ export function BookContextProvider({ children }: BookContextProviderProps) {
       }
     };
     fetchBooksFromApi();
-  }, [fetchBooks, token, setBooks]);
+  }, [token, setBooks]);
 
   return (
     <BookContext.Provider

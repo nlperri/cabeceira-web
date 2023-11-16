@@ -1,7 +1,7 @@
 export enum BookShelfStatus {
-  WANT_TO_READ,
-  READING,
-  READED,
+  WANT_TO_READ = "WANT_TO_READ",
+  READING = "READING",
+  READED = "READED",
 }
 
 interface Author {
@@ -16,7 +16,7 @@ export interface UserBookDetails {
   readedPages: number;
   id: string;
   title: string;
-  totalpages: number;
+  totalPages: number;
   cover: string;
   description: string;
   publishedDate: string;

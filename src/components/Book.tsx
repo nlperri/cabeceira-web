@@ -2,19 +2,19 @@ import { UserBookDetails } from "../@types/UserBookDetails";
 
 interface BookProps {
   book: UserBookDetails;
+  slider: string
 }
 
-const Book = ({ book }: BookProps) => {
-  return <div>{book.title}</div>;
+const Book = ({ book, slider }: BookProps) => {
+  return (
+  <div className={`flex flex-col w-[180px] items-center mt-4 gap-2 box-border ${slider}`}>
+    <img className=" w-[180px]" src={book.cover} alt={book.title}/>
+    <div className="flex flex-col gap-1 items-center">
+    <p className="">{(book.title).substring(0,20) + "..."}</p>
+    <p className="text-sm text-dark-blue uppercase">{book.authors[0].name}</p>
+    </div>
+    <p>{book.readedPages} / {book.totalPages}</p>
+  </div>);
 };
 
 export default Book;
-
-//Book
-// <div className="w-[94px] h-[190px] relative">
-{
-  /* <div className="left-[1px] top-[170px] absolute text-blue-950 text-[11px] font-normal font-['Content']">MARK MANSON</div>
-<img className="w-[94px] h-36 left-0 top-0 absolute" src="https://via.placeholder.com/94x144" />
-<div className="left-[1px] top-[147px] absolute text-black text-xs font-normal font-['Content']">A Sutil Arte de...</div>
-</div> */
-}

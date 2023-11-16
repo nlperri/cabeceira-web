@@ -1,33 +1,62 @@
-import { useContext } from "react";
-import { BookShelfStatus } from "../@types/UserBookDetails";
 import Book from "../components/Book";
-import { BookContext } from "../contexts/BookContext";
+import {useState} from "react";
+import { UserBookDetails } from "../@types/UserBookDetails";
+import { useKeenSlider } from 'keen-slider/react'
+import 'keen-slider/keen-slider.min.css'
+
 
 interface BookSectionProps {
   title: string;
-  status: BookShelfStatus;
+  books: UserBookDetails[]
 }
 
-const BookSection = ({ title, status }: BookSectionProps) => {
-  const { books, isLoading } = useContext(BookContext);
+const BookSection = ({ books, title }: BookSectionProps) => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [loaded, setLoaded] = useState(false);
+
+  const [sliderRef, instanceRef] = useKeenSlider({
+    breakpoints: {
+      "(min-width: 400px)": {
+        slides: { perView: 1, spacing: 5 },
+      },
+      "(min-width: 865px)": {
+        slides: { perView: 2, spacing: 5 },
+      },
+      "(min-width: 1150px)": {
+        slides: { perView: 3, spacing: 5 },
+      },
+      "(min-width: 1300px)": {
+        slides: { perView: 4, spacing: 10 },
+      },
+    },
+    slides: { perView: 1 },
+    slideChanged(slider) {
+      setCurrentSlide(slider.track.details.rel)
+    },
+    created() {
+      setLoaded(true);
+    },
+  })
+
 
   return (
-    <section className="w-6/12 bg-red-500">
-      {!isLoading ? (
+    <section className="w-6/12">
+      
         <div className="flex items-center gap-1">
           <h1 className="text-dark-blue text-3xl font-bold">{title}</h1>
           <h3 className="text-dark-blue text-lg font-bold">
-            ({books.length} livro)
+            ({books.length} {books.length > 1 ? "livros" : "livro"})
           </h3>
         </div>
-      ) : null}
-      {books.length > 0
+      <main ref={sliderRef} className="keen-slider gap-3">
+      {books.length > 0 
         ? books
-            .filter((book) => book.bookshelfStatus === status)
             .map((book) => {
-              return <Book key={book.id} book={book} />;
+              return <Book key={book.id} book={book} slider='keen-slider__slide'/>;
             })
         : null}
+      </main>
+      
     </section>
   );
 };
