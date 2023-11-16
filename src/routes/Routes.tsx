@@ -3,25 +3,32 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import Home from "../pages/Home";
 
-import { AuthenticatedRoute, NotAuthenticatedRoute } from "./AuthenticationRoutes";
+import {
+  AuthenticatedRoute,
+  NotAuthenticatedRoute,
+} from "./AuthenticationRoutes";
+import { BookContextProvider } from "../contexts/BookContext";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <AuthenticatedRoute element={<Home/>} />,
+    element: <AuthenticatedRoute element={<Home />} />,
   },
   {
     path: "/login",
-    element: <NotAuthenticatedRoute element={<Login />}/>,
+    element: <NotAuthenticatedRoute element={<Login />} />,
   },
   {
     path: "/register",
-    element: <NotAuthenticatedRoute element={<Register />}/>,
+    element: <NotAuthenticatedRoute element={<Register />} />,
   },
 ]);
 
 const Routes = () => {
-  return <RouterProvider router={router} />;
+  return (
+    <BookContextProvider>
+      <RouterProvider router={router} />
+    </BookContextProvider>
+  );
 };
-
 export default Routes;

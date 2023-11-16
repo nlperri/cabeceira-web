@@ -20,11 +20,11 @@ export const useAuthentication = () => {
           }
           setIsLoading(false);
         } catch (error) {
-          setIsLoading(false)
+          setIsLoading(false);
           console.error("Error de autenticação: ", error);
         }
-      }else{
-        setIsLoading(false)
+      } else {
+        setIsLoading(false);
       }
     };
 

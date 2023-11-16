@@ -60,11 +60,10 @@ const FormRegister = ({ emmitErrorToast }: FormRegisterProps) => {
       });
       navigate("/login");
     } catch (error) {
-      if(error instanceof AxiosError){
+      if (error instanceof AxiosError) {
         emmitErrorToast(error.response?.data, 1000);
-      }else{
+      } else {
         emmitErrorToast("Email ou senha incorretos", 1000);
-
       }
     }
   }
