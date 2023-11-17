@@ -1,20 +1,20 @@
 import Book from "../components/Book";
 import { useState } from "react";
 import { UserBookDetails } from "../@types/UserBookDetails";
-import { useKeenSlider } from 'keen-slider/react'
-import 'keen-slider/keen-slider.min.css'
-
+import { useKeenSlider } from "keen-slider/react";
+import "keen-slider/keen-slider.min.css";
+import { Arrow } from "./Arrow";
 
 interface BookSectionProps {
   title: string;
-  books: UserBookDetails[]
+  books: UserBookDetails[];
 }
 
 const BookSection = ({ books, title }: BookSectionProps) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [loaded, setLoaded] = useState(false);
 
-  const [sliderRef, instanceRef] = useKeenSlider({
+  const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>({
     breakpoints: {
       "(min-width: 400px)": {
         slides: { perView: 1, spacing: 5 },
@@ -31,35 +31,55 @@ const BookSection = ({ books, title }: BookSectionProps) => {
     },
     slides: { perView: 1 },
     slideChanged(slider) {
-      setCurrentSlide(slider.track.details.rel)
+      setCurrentSlide(slider.track.details.rel);
     },
     created() {
       setLoaded(true);
     },
-  })
-
+  });
 
   return (
-    <section className="w-8/12 mb-16">
-
-      <div className="flex items-center justify-between">
-        <div className="flex items-center justify-around gap-1">
-          <h1 className="text-dark-blue text-3xl font-bold">{title}</h1>
-          <h3 className="text-dark-blue text-lg font-bold">
-            ({books.length} {books.length > 1 ? "livros" : "livro"})
-          </h3>
-        </div>
-        <div className="text-rose-400 text-sm font-bold">Ver todos</div>
+    <section className="w-6/12">
+      <div className="flex items-center gap-1">
+        <h1 className="text-dark-blue text-3xl font-bold">{title}</h1>
+        <h3 className="text-dark-blue text-lg font-bold">
+          ({books.length} {books.length === 1 ? "livro" : "livros"})
+        </h3>
       </div>
-      <main ref={sliderRef} className="keen-slider ">
-        {books.length > 0
-          ? books
-            .map((book) => {
-              return <Book key={book.id} book={book} slider='keen-slider__slide' />;
-            })
-          : null}
-      </main>
+      {books.length > 0 ? (
+        <div className="navigation-wrapper relative">
+          <main ref={sliderRef} className="keen-slider gap-3">
+            {books.map((book) => {
+              return (
+                <Book key={book.id} book={book} slider={`keen-slider__slide`} />
+              );
+            })}
+          </main>
+          {loaded && instanceRef.current && (
+            <div className="">
+              <Arrow
+                left
+                onClick={(e: any) =>
+                  e.stopPropagation() || instanceRef.current?.prev()
+                }
+                disabled={currentSlide === 0}
+              />
 
+              <Arrow
+                onClick={(e: any) =>
+                  e.stopPropagation() || instanceRef.current?.next()
+                }
+                disabled={
+                  currentSlide ===
+                  instanceRef.current.track.details.slides.length - 1
+                }
+              />
+            </div>
+          )}
+        </div>
+      ) : (
+        <div></div>
+      )}
     </section>
   );
 };
