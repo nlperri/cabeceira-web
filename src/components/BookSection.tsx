@@ -39,12 +39,14 @@ const BookSection = ({ books, title }: BookSectionProps) => {
   });
 
   return (
-    <section className="w-6/12">
-      <div className="flex items-center gap-1">
-        <h1 className="text-dark-blue text-3xl font-bold">{title}</h1>
-        <h3 className="text-dark-blue text-lg font-bold">
-          ({books.length} {books.length === 1 ? "livro" : "livros"})
-        </h3>
+    <section className="w-8/12 mb-16">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center justify-around gap-1">
+          <h1 className="text-dark-blue text-3xl font-bold">{title}</h1>
+          <h3 className="text-dark-blue text-lg font-bold">
+            ({books.length} {books.length === 1 ? "livro" : "livros"})
+          </h3>
+        </div>
       </div>
       {books.length > 0 ? (
         <div className="navigation-wrapper relative">

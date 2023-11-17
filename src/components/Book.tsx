@@ -12,7 +12,7 @@ const Book = ({ book, slider }: BookProps) => {
   }
   return (
     <div
-      className={`flex flex-col w-[180px] items-center mt-4 gap-2 box-border ${slider}`}
+      className={`flex flex-col w-[180px] text-center p-1 items-center mt-4 gap-2 ${slider}`}
     >
       <div className="h-[290px] flex items-center">
         <img className=" w-[180px]" src={book.cover} alt={book.title} />

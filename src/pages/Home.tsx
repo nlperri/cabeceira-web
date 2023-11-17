@@ -27,7 +27,7 @@ const Home = () => {
   return (
     <div>
       <Header />
-      <main className="w-full h-[100vh] flex flex-col items-center justify-around">
+      <main className="w-full min-h-[100vh] flex flex-col items-center justify-around">
         {!isLoading
           ? sectionsData.map((section) => {
               const filteredBooks = books.filter((book) => {
