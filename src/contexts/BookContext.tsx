@@ -1,4 +1,11 @@
-import { createContext, ReactNode, useEffect, useState } from "react";
+import {
+  createContext,
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  useEffect,
+  useState,
+} from "react";
 import { UserBookDetails } from "../@types/UserBookDetails";
 import { useCookies } from "react-cookie";
 import { useFetchBooks } from "../hooks/useFetchBooks";
@@ -6,6 +13,7 @@ import { useFetchBooks } from "../hooks/useFetchBooks";
 interface BookContextProps {
   isLoading: boolean;
   books: UserBookDetails[];
+  setBooks: Dispatch<SetStateAction<UserBookDetails[]>>;
 }
 
 interface BookContextProviderProps {
@@ -15,6 +23,7 @@ interface BookContextProviderProps {
 export const BookContext = createContext<BookContextProps>({
   isLoading: true,
   books: [],
+  setBooks: () => {},
 });
 
 export function BookContextProvider({ children }: BookContextProviderProps) {
@@ -42,6 +51,7 @@ export function BookContextProvider({ children }: BookContextProviderProps) {
       value={{
         isLoading,
         books,
+        setBooks,
       }}
     >
       {children}
