@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { ModalContext } from "../contexts/ModalContext";
 import cover from "../assets/altCover.png";
 import closeIcon from "../assets/closeIcon.svg"
-import {sectionsData} from "../lib/sectionsData"
+import { sectionsData } from "../lib/sectionsData"
 
 import { BookShelfStatus } from "../@types/UserBookDetails";
 
@@ -39,7 +39,7 @@ const BookShelfDetails = ({ handleSetIsOpen }: BookShelfDetailsProps) => {
                         <div>
                             {bookContent.authors.map(author => {
                                 return (
-                                    <p className="text-sm text-dark-blue uppercase my-1">{author.name}</p>
+                                    <p key={author.id} className="text-sm text-dark-blue uppercase my-1">{author.name}</p>
                                 )
                             })}
                         </div>
@@ -62,15 +62,14 @@ const BookShelfDetails = ({ handleSetIsOpen }: BookShelfDetailsProps) => {
                             <div className="relative">
                                 <select className="outline-none checked:bg-white active:bg-white font-bold text-sm text-center  border border-pink-salmon w-[210px] bg-white 
                                 rounded-md  h-11 text-pink-salmon transition ease-in-out delay-50">
-                                    {sectionsData.map((section , it)=> {
+                                    {sectionsData.map((section, it) => {
                                         return (
-                                            <option key={it} className="font-bold " 
-                                            selected={(section.status === bookContent.bookshelfStatus)} 
-                                            value={section.status}>{section.title}</option>
+                                            <option key={it} className="font-bold "
+                                                selected={(section.status === bookContent.bookshelfStatus)}
+                                                value={section.status}>{section.title}</option>
                                         )
                                     })}
                                 </select>
-                                
                             </div>
                             <button className="border w-[210px] bg-pink-salmon border-pink-salmon rounded-md  h-11 text-white hover:bg-white hover:text-pink-salmon transition ease-in-out delay-50 font-bold">Atualizar leitura</button>
                         </div>

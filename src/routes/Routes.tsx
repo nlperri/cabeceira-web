@@ -9,11 +9,16 @@ import {
 } from "./AuthenticationRoutes";
 import { BookContextProvider } from "../contexts/BookContext";
 import { ModalContextProvider } from "../contexts/ModalContext";
+import Profile from "../pages/Profile";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <AuthenticatedRoute element={<Home />} />,
+  },
+  {
+    path: "/profile",
+    element: <AuthenticatedRoute element={<Profile />} />,
   },
   {
     path: "/login",
