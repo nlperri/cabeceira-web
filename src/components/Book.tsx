@@ -1,5 +1,7 @@
 import { UserBookDetails } from "../@types/UserBookDetails";
 import cover from "../assets/altCover.png";
+import { useContext } from "react";
+import { ModalContext } from "../contexts/ModalContext";
 
 interface BookProps {
   book: UserBookDetails;
@@ -7,13 +9,17 @@ interface BookProps {
 }
 
 const Book = ({ book, slider }: BookProps) => {
+  const {handleSetBookContent} = useContext(ModalContext)
+
+
   if (book.cover.length == 0) {
     book.cover = cover;
   }
+
   return (
     <div
-      className={`flex flex-col w-[180px] text-center p-1 items-center mt-4 gap-2 ${slider}`}
-    >
+      onClick={() => handleSetBookContent(book)} 
+      className={`flex flex-col w-[180px] text-center p-1 items-center mt-4 gap-2 ${slider}`}>
       <div className="h-[290px] flex items-center">
         <img className=" w-[180px]" src={book.cover} alt={book.title} />
       </div>

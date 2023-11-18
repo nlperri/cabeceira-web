@@ -39,7 +39,7 @@ const BookSection = ({ books, title }: BookSectionProps) => {
   });
 
   return (
-    <section className="w-8/12 mb-16">
+    <section className="w-8/12 mb-16 mt-10">
       <div className="flex items-center justify-between">
         <div className="flex items-center justify-around gap-1">
           <h1 className="text-dark-blue text-3xl font-bold">{title}</h1>
@@ -50,7 +50,7 @@ const BookSection = ({ books, title }: BookSectionProps) => {
       </div>
       {books.length > 0 ? (
         <div className="navigation-wrapper relative">
-          <main ref={sliderRef} className="keen-slider gap-3">
+          <main ref={sliderRef} className="keen-slider">
             {books.map((book) => {
               return (
                 <Book key={book.id} book={book} slider={`keen-slider__slide`} />
@@ -82,6 +82,7 @@ const BookSection = ({ books, title }: BookSectionProps) => {
       ) : (
         <div></div>
       )}
+ 
     </section>
   );
 };

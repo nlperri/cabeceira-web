@@ -8,6 +8,7 @@ import {
   NotAuthenticatedRoute,
 } from "./AuthenticationRoutes";
 import { BookContextProvider } from "../contexts/BookContext";
+import { ModalContextProvider } from "../contexts/ModalContext";
 
 const router = createBrowserRouter([
   {
@@ -26,9 +27,11 @@ const router = createBrowserRouter([
 
 const Routes = () => {
   return (
-    <BookContextProvider>
-      <RouterProvider router={router} />
-    </BookContextProvider>
+    <ModalContextProvider>
+      <BookContextProvider>
+        <RouterProvider router={router} />
+      </BookContextProvider>
+    </ModalContextProvider>
   );
 };
 export default Routes;
