@@ -50,13 +50,13 @@ const BookSection = ({ books, title }: BookSectionProps) => {
       </div>
       {books.length > 0 ? (
         <div className="navigation-wrapper relative">
-          <main ref={sliderRef} className="keen-slider">
+          <div key={books.length} ref={sliderRef} className="keen-slider">
             {books.map((book) => {
               return (
                 <Book key={book.id} book={book} slider={`keen-slider__slide`} />
               );
             })}
-          </main>
+          </div>
           {loaded && instanceRef.current && (
             <div className="">
               <Arrow
@@ -79,10 +79,7 @@ const BookSection = ({ books, title }: BookSectionProps) => {
             </div>
           )}
         </div>
-      ) : (
-        <div></div>
-      )}
- 
+      ) : null}
     </section>
   );
 };

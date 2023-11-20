@@ -21,6 +21,7 @@ const Profile = () => {
     removeCookie("token");
     navigate("/login");
   };
+
   const handleUpdateModal = () => {
     setOpenUpdateModal((previous) => !previous);
   };
@@ -31,7 +32,7 @@ const Profile = () => {
       setUser(user);
     };
     defineUser();
-  }, [user]);
+  }, [setUser]);
 
   return (
     user && (
@@ -72,7 +73,9 @@ const Profile = () => {
           <UpdateUserModal
             emmitErrorToast={emmitErrorToast}
             user={user}
+            setUser={setUser}
             handleUpdateModal={handleUpdateModal}
+            token={token}
           />
         )}
       </div>

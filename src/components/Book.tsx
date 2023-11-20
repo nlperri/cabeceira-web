@@ -9,8 +9,7 @@ interface BookProps {
 }
 
 const Book = ({ book, slider }: BookProps) => {
-  const {handleSetBookContent} = useContext(ModalContext)
-
+  const { handleSetBookContent } = useContext(ModalContext);
 
   if (book.cover.length == 0) {
     book.cover = cover;
@@ -18,8 +17,9 @@ const Book = ({ book, slider }: BookProps) => {
 
   return (
     <div
-      onClick={() => handleSetBookContent(book)} 
-      className={`flex flex-col w-[180px] text-center p-1 items-center mt-4 gap-2 ${slider}`}>
+      onClick={() => handleSetBookContent(book)}
+      className={`flex flex-col w-[180px] text-center p-1 items-center mt-4 gap-2 ${slider}`}
+    >
       <div className="h-[290px] flex items-center">
         <img className=" w-[180px]" src={book.cover} alt={book.title} />
       </div>
@@ -29,9 +29,11 @@ const Book = ({ book, slider }: BookProps) => {
           {book.authors[0].name}
         </p>
       </div>
-      <p>
-        {book.readedPages} / {book.totalPages}
-      </p>
+      {book.bookshelfStatus !== "WANT_TO_READ" ? (
+        <p>
+          {book.readedPages} / {book.totalPages}
+        </p>
+      ) : null}
     </div>
   );
 };
