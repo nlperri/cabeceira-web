@@ -30,7 +30,7 @@ const BookShelfDetails = ({
   const { fetchBooks } = useFetchBooks();
 
   const updateBookSchema = z.object({
-    readedPages: z.coerce.number().int().optional(),
+    readedPages: z.coerce.number().int().optional().default(0),
     bookshelfStatus: z.enum([
       BookShelfStatus.WANT_TO_READ,
       BookShelfStatus.READING,
