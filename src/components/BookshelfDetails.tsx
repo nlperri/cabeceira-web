@@ -66,6 +66,7 @@ const BookShelfDetails = ({
       console.log(response);
       const updatedBooks = await fetchBooks(token);
       setBooks(updatedBooks);
+      handleSetIsOpen();
     } catch (error) {
       console.log(error);
       emmitErrorToast("Não foi possível atualizar livro.", 1000);
@@ -117,7 +118,6 @@ const BookShelfDetails = ({
                       className=" border-b-2 text-center text-xl focus:outline-none border-gray-500 w-[50%]"
                       {...register("readedPages")}
                       type="number"
-                      max={bookContent.totalPages}
                     />
                     <div className="flex gap-2">
                       <p className="font-bold">Total de páginas:</p>
