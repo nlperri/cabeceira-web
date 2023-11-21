@@ -36,9 +36,9 @@ const Profile = () => {
 
   return (
     user && (
-      <div className="relative flex flex-col h-screen">
+      <div className="relative flex flex-col h-screen bg-gray-100">
         <Header />
-        <main className="flex-1 flex flex-col items-center mt-[150px] font-[Content]">
+        <main className="flex-1 flex flex-col items-center mt-[150px] font-[Content] ">
           <div className="w-[70%] flex flex-col ">
             <div className="flex  justify-between items-center">
               <h1 className="text-2xl font-bold text-blue-950">Perfil</h1>

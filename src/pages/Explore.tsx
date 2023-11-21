@@ -12,7 +12,7 @@ const Explore = () => {
   return (
     <div>
       <Header />
-      <main className="w-full min-h-[100vh] flex items-center flex-col ">
+      <main className="w-full min-h-[100vh] flex items-center flex-col bg-gray-100">
         <BookExploreSection />
       </main>
       {isOpen && (
