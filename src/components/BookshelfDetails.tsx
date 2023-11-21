@@ -11,6 +11,7 @@ import { Id } from "react-toastify";
 import { useCookies } from "react-cookie";
 import { BookContext } from "../contexts/BookContext";
 import { useUpdateBook } from "../hooks/useUpdateBook";
+import { useFetchBooks } from "../hooks/useFetchBooks";
 
 interface BookShelfDetailsProps {
   handleSetIsOpen: () => void;
@@ -26,6 +27,7 @@ const BookShelfDetails = ({
   const { bookContent, closeModal } = useContext(ModalContext);
   const { setBooks } = useContext(BookContext);
   const { updateBook } = useUpdateBook();
+  const { fetchBooks } = useFetchBooks();
   const [cookies] = useCookies();
   const token = cookies["token"];
 
@@ -55,13 +57,9 @@ const BookShelfDetails = ({
 
       await updateBook(token, bookContent!.id, data);
 
-      setBooks((prevBooks) =>
-        prevBooks.map((prevBook) =>
-          prevBook.bookId === bookContent!.bookId
-            ? { ...prevBook, ...data }
-            : prevBook
-        )
-      );
+      const updatedBooks = await fetchBooks(token);
+      setBooks(updatedBooks);
+
       handleSetIsOpen();
       emmitSuccessToast("Livro atualizado com sucesso", 1000);
     } catch (error) {
