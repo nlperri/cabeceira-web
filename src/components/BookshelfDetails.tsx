@@ -10,24 +10,24 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Id } from "react-toastify";
 import { useCookies } from "react-cookie";
 import { BookContext } from "../contexts/BookContext";
-import { useFetchBooks } from "../hooks/useFetchBooks";
 import { useUpdateBook } from "../hooks/useUpdateBook";
 
 interface BookShelfDetailsProps {
   handleSetIsOpen: () => void;
   emmitErrorToast: (message: string, duration: number) => Id;
+  emmitSuccessToast: (message: string, duration: number) => Id;
 }
 
 const BookShelfDetails = ({
   handleSetIsOpen,
   emmitErrorToast,
+  emmitSuccessToast,
 }: BookShelfDetailsProps) => {
   const { bookContent, closeModal } = useContext(ModalContext);
   const { setBooks } = useContext(BookContext);
   const { updateBook } = useUpdateBook();
   const [cookies] = useCookies();
   const token = cookies["token"];
-  const { fetchBooks } = useFetchBooks();
 
   const updateBookSchema = z.object({
     readedPages: z.coerce.number().int().optional().default(0),
@@ -48,10 +48,12 @@ const BookShelfDetails = ({
     try {
       if (data.readedPages && data.readedPages > bookContent!.totalPages) {
         return emmitErrorToast(
-          "Número de páginas lidas não pode ser maior que número total de páginas.",
+          "Número de páginas lidas não pode ser maior que número total de páginas",
           1000
         );
       }
+
+      await updateBook(token, bookContent!.id, data);
 
       setBooks((prevBooks) =>
         prevBooks.map((prevBook) =>
@@ -60,14 +62,10 @@ const BookShelfDetails = ({
             : prevBook
         )
       );
-
-      await updateBook(token, bookContent!.id, data);
-      const updatedBooks = await fetchBooks(token);
-      setBooks(updatedBooks);
       handleSetIsOpen();
+      emmitSuccessToast("Livro atualizado com sucesso", 1000);
     } catch (error) {
-      console.log(error);
-      emmitErrorToast("Não foi possível atualizar livro.", 1000);
+      emmitErrorToast("Erro ao atualizar livro", 1000);
     }
   }
 
@@ -82,7 +80,7 @@ const BookShelfDetails = ({
         onClick={(e) => closeModal(e)}
       >
         <div
-          className="bg-white w-[70%] h-[70%] max-w-[600px] rounded-md relative"
+          className="bg-white w-[70%] h-[65%] max-w-[600px] rounded-md relative"
           id="modalBody"
         >
           <img

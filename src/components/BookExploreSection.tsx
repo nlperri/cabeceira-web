@@ -3,23 +3,36 @@ import { useState, useEffect } from "react";
 import { useSearchBooks } from "../hooks/useSearchBooks";
 import { BookVolumeData } from "../@types/bookVolume.type";
 import BookExplore from "./BookExplore";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 const BookExploreSection = () => {
   const [inputValue, setInputValue] = useState("");
   const { searchBooks } = useSearchBooks();
   const [books, setBooks] = useState<BookVolumeData[]>([]);
+  const [page, setPage] = useState(1);
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
   };
 
+  const fetchMoreData = async () => {
+    try {
+      const renderBook = inputValue.length === 0 ? "tecnologia" : inputValue;
+      const searchedBooks = await searchBooks(renderBook, page + 1, 20);
+      setBooks((prevBooks) => [...prevBooks, ...searchedBooks]);
+      setPage((prevPage) => prevPage + 1);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
     const searchBooksFromApi = async () => {
       try {
-        const renderBook = inputValue.length === 0 ? "teste" : inputValue;
+        const renderBook = inputValue.length === 0 ? "tecnologia" : inputValue;
         const searchedBooks = await searchBooks(renderBook, 1, 20);
-        console.log(searchedBooks);
         setBooks(searchedBooks);
+        setPage(1);
       } catch (error) {
         console.error(error);
       }
@@ -29,7 +42,7 @@ const BookExploreSection = () => {
 
   return (
     books.length > 0 && (
-      <section className="w-full flex flex-col items-center mt-5">
+      <section className="w-[80%] flex flex-col items-center mt-5">
         <div className="relative max-w-[400px] w-[80%]">
           <input
             value={inputValue}
@@ -44,16 +57,28 @@ const BookExploreSection = () => {
             src={searchIcon}
           />
         </div>
-        <div className="w-8/12 mb-16 mt-10">
-          <h1 className="text-blue-950 text-2xl font-bold">
-            Principais livros
-          </h1>
-        </div>
-        <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-y-20">
-          {books.map((book, id) => {
-            return <BookExplore key={id} book={book} />;
-          })}
-        </section>
+        <InfiniteScroll
+          className="custom-infinite-scroll"
+          dataLength={books.length}
+          next={fetchMoreData}
+          hasMore={true}
+          loader={
+            <h4 className="p-10 w-full text-center text-blue-950 text-xl font-bold">
+              Loading...
+            </h4>
+          }
+        >
+          <div className="w-8/12 mb-16 mt-10">
+            <h1 className="text-blue-950 text-2xl font-bold">
+              Principais livros
+            </h1>
+          </div>
+          <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-y-20 gap-x-20">
+            {books.map((book, id) => {
+              return <BookExplore key={id} book={book} />;
+            })}
+          </section>
+        </InfiniteScroll>
       </section>
     )
   );

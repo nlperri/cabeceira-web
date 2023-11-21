@@ -4,7 +4,7 @@ export enum BookShelfStatus {
   READED = "READED",
 }
 
-interface Author {
+export interface Author {
   name: string;
   id: string;
 }

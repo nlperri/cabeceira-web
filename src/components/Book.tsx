@@ -11,9 +11,7 @@ interface BookProps {
 const Book = ({ book, slider }: BookProps) => {
   const { handleSetBookContent } = useContext(ModalContext);
 
-  if (book.cover.length == 0) {
-    book.cover = cover;
-  }
+  book.cover = book.cover.length > 0 ? book.cover : cover;
 
   return (
     <div
@@ -31,7 +29,7 @@ const Book = ({ book, slider }: BookProps) => {
       </div>
       {book.bookshelfStatus !== "WANT_TO_READ" ? (
         <p>
-          {book.readedPages } / {book.totalPages}
+          {book.readedPages} / {book.totalPages}
         </p>
       ) : null}
     </div>

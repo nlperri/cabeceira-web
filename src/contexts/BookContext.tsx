@@ -14,6 +14,7 @@ interface BookContextProps {
   isLoading: boolean;
   books: UserBookDetails[];
   setBooks: Dispatch<SetStateAction<UserBookDetails[]>>;
+  setIsLoading: Dispatch<SetStateAction<boolean>>;
 }
 
 interface BookContextProviderProps {
@@ -24,6 +25,7 @@ export const BookContext = createContext<BookContextProps>({
   isLoading: true,
   books: [],
   setBooks: () => {},
+  setIsLoading: () => true,
 });
 
 export function BookContextProvider({ children }: BookContextProviderProps) {
@@ -36,6 +38,7 @@ export function BookContextProvider({ children }: BookContextProviderProps) {
   useEffect(() => {
     const fetchBooksFromApi = async () => {
       try {
+        setIsLoading(true);
         const books = await fetchBooks(token);
         setBooks(books);
         setIsLoading(false);
@@ -44,7 +47,7 @@ export function BookContextProvider({ children }: BookContextProviderProps) {
       }
     };
     fetchBooksFromApi();
-  }, [token, setBooks]);
+  }, [token, setBooks, setIsLoading]);
 
   return (
     <BookContext.Provider
@@ -52,6 +55,7 @@ export function BookContextProvider({ children }: BookContextProviderProps) {
         isLoading,
         books,
         setBooks,
+        setIsLoading,
       }}
     >
       {children}

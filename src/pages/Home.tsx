@@ -10,31 +10,34 @@ import { useToast } from "../hooks/useToast";
 const Home = () => {
   const { books, isLoading } = useContext(BookContext);
   const { isOpen, handleSetIsOpen } = useContext(ModalContext);
-  const { emmitErrorToast, Toast } = useToast();
+  const { emmitErrorToast, emmitSuccessToast, Toast } = useToast();
 
   return (
     <div>
       <Header />
       <main className="w-full min-h-[100vh] flex flex-col items-center justify-around">
-        {!isLoading
-          ? sectionsData.map((section) => {
-              const filteredBooks = books.filter((book) => {
-                return book.bookshelfStatus === section.status;
-              });
-              return (
-                <BookSection
-                  books={filteredBooks}
-                  key={section.id}
-                  title={section.title}
-                />
-              );
-            })
-          : null}
+        {!isLoading ? (
+          sectionsData.map((section) => {
+            const filteredBooks = books.filter((book) => {
+              return book.bookshelfStatus === section.status;
+            });
+            return (
+              <BookSection
+                books={filteredBooks}
+                key={section.id}
+                title={section.title}
+              />
+            );
+          })
+        ) : (
+          <p>Loading...</p>
+        )}
       </main>
       {isOpen && (
         <BookShelfDetails
           handleSetIsOpen={handleSetIsOpen}
           emmitErrorToast={emmitErrorToast}
+          emmitSuccessToast={emmitSuccessToast}
         />
       )}
       <Toast />
