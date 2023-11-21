@@ -54,7 +54,7 @@ const UpdateUserModal = ({
 
       const filteredData = Object.fromEntries(
         Object.entries(data).filter(
-          ([key, value]) => value !== undefined && value !== ""
+          ([_, value]) => value !== undefined && value !== ""
         )
       );
 
@@ -93,10 +93,9 @@ const UpdateUserModal = ({
               <input
                 className="p-2 bg-white rounded-lg border border-neutral-400"
                 type="text"
-                
                 id="name"
                 {...register("name", {
-                  value:user.name,
+                  value: user.name,
                 })}
               />
               <label className="font-semibold text-blue-950" htmlFor="lastname">
@@ -107,7 +106,7 @@ const UpdateUserModal = ({
                 type="text"
                 id="lastname"
                 {...register("lastName", {
-                  value:user.lastName
+                  value: user.lastName,
                 })}
               />
               <label className="font-semibold text-blue-950" htmlFor="password">
