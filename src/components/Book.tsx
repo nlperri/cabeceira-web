@@ -15,7 +15,7 @@ const Book = ({ book, slider }: BookProps) => {
 
   return (
     <div
-      id={book.id}
+      id={book.bookId}
       onClick={() => handleSetBookContent(book)}
       className={`flex flex-col w-[180px] text-center p-1 items-center mt-4 gap-2 ${slider}`}
     >
