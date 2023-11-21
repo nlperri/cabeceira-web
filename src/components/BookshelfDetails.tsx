@@ -52,7 +52,6 @@ const BookShelfDetails = ({
           1000
         );
       }
-      console.log(data);
 
       setBooks((prevBooks) =>
         prevBooks.map((prevBook) =>
@@ -63,7 +62,6 @@ const BookShelfDetails = ({
       );
 
       const response = await updateBook(token, bookContent!.id, data);
-      console.log(response);
       const updatedBooks = await fetchBooks(token);
       setBooks(updatedBooks);
       handleSetIsOpen();

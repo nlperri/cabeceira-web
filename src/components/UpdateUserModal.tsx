@@ -93,8 +93,11 @@ const UpdateUserModal = ({
               <input
                 className="p-2 bg-white rounded-lg border border-neutral-400"
                 type="text"
+                
                 id="name"
-                {...register("name")}
+                {...register("name", {
+                  value:user.name,
+                })}
               />
               <label className="font-semibold text-blue-950" htmlFor="lastname">
                 Sobrenome:
@@ -103,7 +106,9 @@ const UpdateUserModal = ({
                 className="p-2 bg-white rounded-lg border border-neutral-400"
                 type="text"
                 id="lastname"
-                {...register("lastName")}
+                {...register("lastName", {
+                  value:user.lastName
+                })}
               />
               <label className="font-semibold text-blue-950" htmlFor="password">
                 Senha:
