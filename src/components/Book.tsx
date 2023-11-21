@@ -31,7 +31,7 @@ const Book = ({ book, slider }: BookProps) => {
       </div>
       {book.bookshelfStatus !== "WANT_TO_READ" ? (
         <p>
-          {book.readedPages} / {book.totalPages}
+          {book.readedPages } / {book.totalPages}
         </p>
       ) : null}
     </div>
