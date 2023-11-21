@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import Home from "../pages/Home";
+import Explore from "../pages/Explore";
 
 import {
   AuthenticatedRoute,
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
   {
     path: "/register",
     element: <NotAuthenticatedRoute element={<Register />} />,
+  },
+  {
+    path: "/explore",
+    element: <AuthenticatedRoute element={<Explore />} />,
   },
 ]);
 

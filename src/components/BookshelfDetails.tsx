@@ -61,7 +61,7 @@ const BookShelfDetails = ({
         )
       );
 
-      const response = await updateBook(token, bookContent!.id, data);
+      await updateBook(token, bookContent!.id, data);
       const updatedBooks = await fetchBooks(token);
       setBooks(updatedBooks);
       handleSetIsOpen();
