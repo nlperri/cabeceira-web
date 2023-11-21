@@ -11,7 +11,7 @@ const BookExplore = ({ book }: BookExploreProps) => {
   const { handleSetBookExploreContent } = useContext(ModalContext);
 
   return (
-    <div>
+    <div id={book.id}>
       <div
         onClick={() => handleSetBookExploreContent(book)}
         className="flex flex-col h-[290px] items-center"
