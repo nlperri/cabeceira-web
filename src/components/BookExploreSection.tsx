@@ -25,7 +25,16 @@ const BookExploreSection = () => {
       console.error(error);
     }
   };
-
+  const fetchDataBySearch = async () => {
+    try {
+      const renderBook = inputValue.length === 0 ? "tecnologia" : inputValue;
+      const searchedBooks = await searchBooks(renderBook, 1, 20);
+      setBooks(searchedBooks);
+      setPage(1);
+    } catch (error) {
+      console.error(error);
+    }
+  }
   useEffect(() => {
     const searchBooksFromApi = async () => {
       try {
@@ -38,23 +47,25 @@ const BookExploreSection = () => {
       }
     };
     searchBooksFromApi();
-  }, [inputValue]);
+  }, []);
 
   return (
     books.length > 0 && (
-      <section className="w-[80%] flex flex-col items-center mt-5">
+      <section className="w-[80%] flex flex-col items-center mt-5 ">
         <div className="relative max-w-[400px] w-[80%]">
           <input
             value={inputValue}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               handleInput(e);
             }}
-            className="w-full bg-violet-100 rounded-lg h-11 pl-10"
+            className="w-full bg-violet-100 rounded-lg h-11 pl-5 outline-blue-950"
             placeholder="Buscar por título"
           />
           <img
-            className="absolute top-[50%] translate-y-[-50%] left-2"
+            id="searchBooks"
+            className="absolute cursor-pointer top-[50%] right-3 translate-y-[-50%]"
             src={searchIcon}
+            onClick={fetchDataBySearch}
           />
         </div>
         <InfiniteScroll
@@ -73,7 +84,7 @@ const BookExploreSection = () => {
               Principais livros
             </h1>
           </div>
-          <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-y-20 gap-x-20">
+          <section id="searchResult" className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-y-20 gap-x-20">
             {books.map((book, id) => {
               return <BookExplore key={id} book={book} />;
             })}
