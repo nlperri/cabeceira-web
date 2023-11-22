@@ -69,7 +69,7 @@ const UpdateUserModal = ({
 
   return (
     user && (
-      <div className="absolute h-full w-full bg-white">
+      <div className="absolute h-full w-full bg-white" id="updateUserModal">
         <img
           onClick={handleUpdateModal}
           className=" absolute right-1 top-1 w-10 cursor-pointer"
