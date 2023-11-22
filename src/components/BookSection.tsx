@@ -50,7 +50,7 @@ const BookSection = ({ books, title }: BookSectionProps) => {
       </div>
       {books.length > 0 ? (
         <div className="navigation-wrapper relative">
-          <div key={books.length} ref={sliderRef} className="keen-slider">
+          <div key={books.length} ref={sliderRef} className="keen-slider" id={title + "_keen"}>
             {books.map((book) => {
               return (
                 <Book key={book.id} book={book} slider={`keen-slider__slide`} />

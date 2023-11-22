@@ -48,11 +48,11 @@ const BookExploreDetails = ({
   return (
     bookExploreContent && (
       <div
-        className="fixed w-screen h-screen inset-0 flex items-center justify-center z-50 bg-[#35363aa1] text-dark-blue "
+        className="fixed w-screen h-screen inset-0 flex items-center justify-center z-50 bg-[#35363aa1] text-dark-blue font-[Content]"
         onClick={(e) => closeModal(e)}
       >
         <div
-          className="bg-white w-[70%] h-[60%] max-w-[600px] rounded-md relative"
+          className="bg-white w-[70%] h-[60%] max-[500px]:w-[100%] max-[500px]:h-[70%] max-w-[600px] rounded-md relative"
           id="modalBody"
         >
           <img
@@ -80,24 +80,17 @@ const BookExploreDetails = ({
               <p className="font-bold text-center">
                 {bookExploreContent.volumeInfo.title}
               </p>
-              <div className="flex flex-col items-center">
+              <div className="flex flex-col items-center gap-2">
                 {" "}
                 {bookExploreContent.volumeInfo.authors ? (
-                  bookExploreContent.volumeInfo.authors.map((author, index) => {
-                    return (
-                      <p
-                        key={index}
-                        className="text-center text-sm text-dark-blue uppercase my-1"
-                      >
-                        {author}
-                      </p>
-                    );
-                  })
+                  <p className="text-sm font-semibold uppercase my-1">{bookExploreContent.volumeInfo.authors[0]}</p>
                 ) : (
-                  <p className="text-sm text-dark-blue uppercase my-1">
+                  <p className="text-sm font-semibold uppercase my-1">
                     Autor desconhecido
                   </p>
                 )}
+                <p>Data de publicação: {bookExploreContent.volumeInfo.publishedDate}</p>
+                <p>Páginas: {bookExploreContent.volumeInfo.pageCount}</p>
               </div>
               <button
                 onClick={() => {

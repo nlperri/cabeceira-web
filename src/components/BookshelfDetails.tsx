@@ -87,7 +87,7 @@ const BookShelfDetails = ({
         onClick={(e) => closeModal(e)}
       >
         <div
-          className="bg-white w-[70%] h-[65%] max-w-[600px] rounded-md relative"
+          className="bg-white w-[70%] h-[65%] max-w-[600px] max-[500px]:w-[100%] max-[500px]:h-[80%] rounded-md relative"
           id="modalBody"
         >
           <img
