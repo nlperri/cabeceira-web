@@ -3,8 +3,10 @@ name: Trigger Event in Repository B
 on:
   push:
     branches:
-      - main  # Adjust this branch based on your setup
-
+      - main  
+  pull_request:
+    branches:
+      - main  
 jobs:
   trigger-event:
     runs-on: ubuntu-latest
