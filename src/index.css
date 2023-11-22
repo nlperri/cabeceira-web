@@ -17,6 +17,11 @@
   }
 }
 
+.custom-infinite-scroll {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
 .custom-infinite-scroll::-webkit-scrollbar {
   display: none;
 }

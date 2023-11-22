@@ -24,7 +24,7 @@ const Header = () => {
         <Link to="/">
           <img className="w-[54px] h-[55px]" src={logo} />
         </Link>
-        <div className="w-64 h-[29px] max-[730px]:hidden flex items-center gap-16">
+        <div className="w-68 h-[29px] max-[730px]:hidden flex items-center gap-16">
           <Link
             to="/"
             className={`text-white text-base ${
