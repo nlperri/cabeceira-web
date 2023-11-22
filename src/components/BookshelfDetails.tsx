@@ -51,7 +51,6 @@ const BookShelfDetails = ({
   });
 
   async function handleUpdateBook(data: updateBookInputs) {
-
     try {
       if (data.readedPages && data.readedPages > bookContent!.totalPages) {
         return emmitErrorToast(
@@ -73,7 +72,7 @@ const BookShelfDetails = ({
   }
 
   function handleDeleteBookModal() {
-    SetDeleteBookOpen(previous => !previous)
+    SetDeleteBookOpen((previous) => !previous);
   }
 
   if (bookContent?.cover.length == 0) {
@@ -86,7 +85,7 @@ const BookShelfDetails = ({
         onClick={(e) => closeModal(e)}
       >
         <div
-          className="bg-white w-[70%] h-[65%] max-w-[600px] max-[500px]:w-[100%] max-[500px]:h-[90%] rounded-md relative"
+          className="bg-white w-[70%] min-h-[650px] max-w-[600px] max-[500px]:w-[100%] max-[500px]:h-[90%] rounded-md relative"
           id="modalBody"
         >
           <img
@@ -119,7 +118,7 @@ const BookShelfDetails = ({
                     <input
                       className=" border-b-2 text-center text-xl focus:outline-none border-gray-500 w-[50%]"
                       {...register("readedPages", {
-                        value: bookContent.readedPages
+                        value: bookContent.readedPages,
                       })}
                       type="number"
                     />
@@ -160,7 +159,11 @@ const BookShelfDetails = ({
                   </button>
                 </div>
                 <div className="w-full flex justify-center p-2 mt-4">
-                  <img onClick={handleDeleteBookModal} className=" cursor-pointer hover:bg-red-900 bg-red-800 px-5 py-1.5 rounded" src={deleteIcon} />
+                  <img
+                    onClick={handleDeleteBookModal}
+                    className=" cursor-pointer hover:bg-red-900 bg-red-800 px-5 py-1.5 rounded"
+                    src={deleteIcon}
+                  />
                 </div>
               </form>
             </div>
