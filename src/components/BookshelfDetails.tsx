@@ -82,11 +82,11 @@ const BookShelfDetails = ({
   return (
     bookContent && (
       <div
-        className="fixed w-screen h-screen inset-0 flex items-center justify-center z-49 bg-[#35363aa1] text-dark-blue "
+        className="fixed min-w-screen min-h-screen inset-0 flex items-center justify-center z-49 bg-[#35363aa1] text-dark-blue "
         onClick={(e) => closeModal(e)}
       >
         <div
-          className="bg-white w-[70%] h-[65%] max-w-[600px] max-[500px]:w-[100%] max-[500px]:h-[80%] rounded-md relative"
+          className="bg-white w-[70%] h-[65%] max-w-[600px] max-[500px]:w-[100%] max-[500px]:h-[90%] rounded-md relative"
           id="modalBody"
         >
           <img
