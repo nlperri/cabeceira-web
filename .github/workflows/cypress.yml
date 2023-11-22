@@ -10,11 +10,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Trigger Repository B
-        run: |
-          curl -X POST \
-            -H "Authorization: Bearer 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" \
-            -H "Accept: application/vnd.github.everest-preview+json" \
-            -H "Content-Type: application/json" \
-            https://api.github.com/repos/JoaoVitorSantDrade/cypress-cabeceira/dispatches \
-            -d '{"event_type": "trigger-repo-b"}'
+      - name: Repository Dispatch
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          token: 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
+          repository: JoaoVitorSantDrade/cypress-cabeceira
+          event-type: trigger-repo-b
