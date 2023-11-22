@@ -1,7 +1,8 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { ModalContext } from "../contexts/ModalContext";
 import cover from "../assets/altCover.png";
 import closeIcon from "../assets/closeIcon.svg";
+import deleteIcon from "../assets/deleteIcon.svg";
 import { sectionsData } from "../lib/sectionsData";
 import { BookShelfStatus } from "../@types/UserBookDetails";
 import { z } from "zod";
@@ -12,6 +13,8 @@ import { useCookies } from "react-cookie";
 import { BookContext } from "../contexts/BookContext";
 import { useUpdateBook } from "../hooks/useUpdateBook";
 import { useFetchBooks } from "../hooks/useFetchBooks";
+import { useDeleteBook } from "../hooks/useDeleteBook";
+import DeleteBookModal from "./DeleteBookModal";
 
 interface BookShelfDetailsProps {
   handleSetIsOpen: () => void;
@@ -28,6 +31,8 @@ const BookShelfDetails = ({
   const { setBooks } = useContext(BookContext);
   const { updateBook } = useUpdateBook();
   const { fetchBooks } = useFetchBooks();
+  const [deleteModalOpen, SetDeleteBookOpen] = useState(false);
+
   const [cookies] = useCookies();
   const token = cookies["token"];
 
@@ -47,6 +52,7 @@ const BookShelfDetails = ({
   });
 
   async function handleUpdateBook(data: updateBookInputs) {
+
     try {
       if (data.readedPages && data.readedPages > bookContent!.totalPages) {
         return emmitErrorToast(
@@ -67,14 +73,17 @@ const BookShelfDetails = ({
     }
   }
 
+  function handleDeleteBookModal() {
+    SetDeleteBookOpen(previous => !previous)
+  }
+
   if (bookContent?.cover.length == 0) {
     bookContent.cover = cover;
   }
-
   return (
     bookContent && (
       <div
-        className="fixed w-screen h-screen inset-0 flex items-center justify-center z-50 bg-[#35363aa1] text-dark-blue "
+        className="fixed w-screen h-screen inset-0 flex items-center justify-center z-49 bg-[#35363aa1] text-dark-blue "
         onClick={(e) => closeModal(e)}
       >
         <div
@@ -110,7 +119,9 @@ const BookShelfDetails = ({
                   <div className="items-center flex flex-col gap-4">
                     <input
                       className=" border-b-2 text-center text-xl focus:outline-none border-gray-500 w-[50%]"
-                      {...register("readedPages")}
+                      {...register("readedPages", {
+                        value: bookContent.readedPages
+                      })}
                       type="number"
                     />
                     <div className="flex gap-2">
@@ -119,7 +130,7 @@ const BookShelfDetails = ({
                     </div>
                   </div>
                 )}
-                <div className="w-full mt-16 flex gap-8 flex-wrap justify-center">
+                <div className="w-full mt-10 flex gap-8 flex-wrap justify-center">
                   <div className="relative">
                     <select
                       {...register("bookshelfStatus")}
@@ -149,10 +160,24 @@ const BookShelfDetails = ({
                     Atualizar leitura
                   </button>
                 </div>
+                <div className="w-full flex justify-center p-2 mt-4">
+                  <img onClick={handleDeleteBookModal} className=" cursor-pointer hover:bg-red-900 bg-red-800 px-5 py-1.5 rounded" src={deleteIcon} />
+                </div>
               </form>
             </div>
           </div>
         </div>
+        {deleteModalOpen && (
+          <DeleteBookModal
+            handleBookshelfDetailsModal={handleSetIsOpen}
+            bookContent={bookContent}
+            token={token}
+            handleDeleteBookModal={handleDeleteBookModal}
+            emmitErrorToast={emmitErrorToast}
+            emmitSuccessToast={emmitSuccessToast}
+            setBooks={setBooks}
+          />
+        )}
       </div>
     )
   );
