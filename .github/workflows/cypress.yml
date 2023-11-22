@@ -1,18 +1,19 @@
-name: Dispatch Event to Cypress-Cabeceira
+name: Trigger Event in Repository B
 
 on:
   push:
     branches:
-      - main 
+      - main  # Adjust this branch based on your setup
 
 jobs:
-  dispatch:
+  trigger-event:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Dispatch repository B event
-        uses: peter-evans/repository-dispatch@v2
-        with:
-          token: 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
-          repository: JoaoVitorSantDrade/cypress-cabeceira
-          event-type: trigger-event
+      - name: Trigger Repository B workflow
+        run: |
+          curl -X POST \
+            -H "Authorization: Bearer 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" \
+            -H "Accept: application/vnd.github.v3+json" \
+            https://api.github.com/repos/JoaoVitorSantDrade/cypress-cabeceira/actions/workflows/on-repo-a-push.yml/dispatches \
+            -d '{"ref":"main"}'
