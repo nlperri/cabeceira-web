@@ -4,6 +4,8 @@
 
 O Cabeceira Web é a interface do usuário para o aplicativo de gerenciamento de livros Cabeceira API. Essa aplicação web permite aos usuários interagirem de forma intuitiva com sua biblioteca pessoal, visualizando, adicionando e gerenciando livros.
 
+**Deploy:** [cabeceira-web](https://cabeceira-web.vercel.app/)
+
 **Link para o Cabeceira API (Backend):** [cabeceira-api](https://github.com/nlperri/cabeceira-api)
 
 **Repositório e2e cypress:** [cypress-cabeceira](https://github.com/JoaoVitorSantDrade/cypress-cabeceira)
