@@ -13,7 +13,6 @@ import { useCookies } from "react-cookie";
 import { BookContext } from "../contexts/BookContext";
 import { useUpdateBook } from "../hooks/useUpdateBook";
 import { useFetchBooks } from "../hooks/useFetchBooks";
-import { useDeleteBook } from "../hooks/useDeleteBook";
 import DeleteBookModal from "./DeleteBookModal";
 
 interface BookShelfDetailsProps {

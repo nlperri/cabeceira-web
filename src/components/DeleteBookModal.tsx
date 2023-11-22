@@ -1,7 +1,5 @@
-import closeIcon from "../assets/closeIcon.svg";
 import { Id } from "react-toastify";
 import { UserBookDetails } from "../@types/UserBookDetails";
-import { UserDetailsData } from "../@types/UserDetailsData.type";
 import { useDeleteBook } from "../hooks/useDeleteBook";
 import { useFetchBooks } from "../hooks/useFetchBooks";
 

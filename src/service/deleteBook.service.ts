@@ -1,4 +1,3 @@
-import { UserBookDetails } from "../@types/UserBookDetails";
 import { api } from "../lib/api";
 
 export class DeleteBookService {
