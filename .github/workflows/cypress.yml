@@ -14,5 +14,5 @@ jobs:
         uses: peter-evans/repository-dispatch@v2
         with:
           token: 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
-          repository: your-username/repo-b
+          repository: JoaoVitorSantDrade/cypress-cabeceira
           event-type: trigger-repo-b
