@@ -3,11 +3,13 @@ import React from "react";
 interface SpinnerProps {
   width?: string;
   height?: string;
+  stroke?: string;
 }
 
 const Loading: React.FC<SpinnerProps> = ({
   width = "200px",
   height = "200px",
+  stroke = "#1b245c",
 }) => {
   return (
     <svg
@@ -28,7 +30,7 @@ const Loading: React.FC<SpinnerProps> = ({
         cx="50"
         cy="50"
         fill="none"
-        stroke="#1b245c"
+        stroke={stroke}
         strokeWidth="10"
         r="35"
         strokeDasharray="164.93361431346415 56.97787143782138"

@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Id } from "react-toastify";
 import { useUpdateUser } from "../hooks/useUpdateUser";
+import Loading from "./Loading";
 
 interface UpdateUserProps {
   user: UserDetailsData;
@@ -34,7 +35,7 @@ const UpdateUserModal = ({
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<updateUserInputs>({
     resolver: zodResolver(updateUserFormSchema),
   });
@@ -121,14 +122,23 @@ const UpdateUserModal = ({
               <div className="text-blue-950 text-[14px] ml-4 font-normal">
                 Sua senha deve ter no mínimo 8 caracteres.
               </div>
-
-              <button
-                type="submit"
-                onClick={() => handleErrors()}
-                className="mt-32 mb-4 self-center w-[50%] max-w-[300px] p-2 text-center bg-white rounded-lg border border-rose-400 text-rose-400 text-[14px] font-bold hover:bg-pink-salmon hover:text-white cursor-pointer"
-              >
-                Atualizar usuário
-              </button>
+              {isSubmitting ? (
+                <button
+                  type="submit"
+                  onClick={() => handleErrors()}
+                  className="mt-32 mb-4 self-center w-[50%] max-w-[300px] p-2 text-center bg-white rounded-lg border border-rose-400 text-rose-400 text-[14px] font-bold hover:bg-pink-salmon hover:text-white cursor-pointer"
+                >
+                  <Loading width="20px" height="20px" />
+                </button>
+              ) : (
+                <button
+                  type="submit"
+                  onClick={() => handleErrors()}
+                  className="mt-32 mb-4 self-center w-[50%] max-w-[300px] p-2 text-center bg-white rounded-lg border border-rose-400 text-rose-400 text-[14px] font-bold hover:bg-pink-salmon hover:text-white cursor-pointer"
+                >
+                  Atualizar usuário
+                </button>
+              )}
             </form>
           </div>
         </div>
