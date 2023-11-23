@@ -8,6 +8,7 @@ import cover from "../assets/altCover.png";
 import { useAddBook } from "../hooks/useAddBook";
 import { AxiosError } from "axios";
 import { useFetchBooks } from "../hooks/useFetchBooks";
+import Loading from "./Loading";
 
 interface BookExploreDetailsProps {
   handleSetIsOpen: () => void;
@@ -21,7 +22,7 @@ const BookExploreDetails = ({
   emmitSuccessToast,
 }: BookExploreDetailsProps) => {
   const { bookExploreContent, closeModal } = useContext(ModalContext);
-  const { setBooks } = useContext(BookContext);
+  const { setBooks, setIsLoading, isLoading } = useContext(BookContext);
   const { fetchBooks } = useFetchBooks();
   const { addBook } = useAddBook();
   const [cookies] = useCookies();
@@ -29,9 +30,11 @@ const BookExploreDetails = ({
 
   const handleAddBook = async (id: string) => {
     try {
+      setIsLoading(true);
       await addBook(token, id);
       const updatedBooks = await fetchBooks(token);
       setBooks(updatedBooks);
+      setIsLoading(false);
       handleSetIsOpen();
       emmitSuccessToast("Livro adicionado com sucesso", 1000);
     } catch (error) {
@@ -83,23 +86,39 @@ const BookExploreDetails = ({
               <div className="flex flex-col items-center gap-2">
                 {" "}
                 {bookExploreContent.volumeInfo.authors ? (
-                  <p className="text-sm font-semibold uppercase my-1">{bookExploreContent.volumeInfo.authors[0]}</p>
+                  <p className="text-sm font-semibold uppercase my-1">
+                    {bookExploreContent.volumeInfo.authors[0]}
+                  </p>
                 ) : (
                   <p className="text-sm font-semibold uppercase my-1">
                     Autor desconhecido
                   </p>
                 )}
-                <p>Data de publicação: {bookExploreContent.volumeInfo.publishedDate}</p>
+                <p>
+                  Data de publicação:{" "}
+                  {bookExploreContent.volumeInfo.publishedDate}
+                </p>
                 <p>Páginas: {bookExploreContent.volumeInfo.pageCount}</p>
               </div>
-              <button
-                onClick={() => {
-                  handleAddBook(bookExploreContent.id);
-                }}
-                className="border w-[210px] bg-pink-salmon border-pink-salmon rounded-md  h-11 text-white hover:bg-white hover:text-pink-salmon transition ease-in-out delay-50 font-bold"
-              >
-                Adicionar
-              </button>
+              {isLoading ? (
+                <button
+                  onClick={() => {
+                    handleAddBook(bookExploreContent.id);
+                  }}
+                  className="border w-[210px] bg-pink-salmon border-pink-salmon rounded-md  h-11 text-white hover:bg-white hover:text-pink-salmon transition ease-in-out delay-50 font-bold"
+                >
+                  <Loading width="28px" height="28px" />
+                </button>
+              ) : (
+                <button
+                  onClick={() => {
+                    handleAddBook(bookExploreContent.id);
+                  }}
+                  className="border w-[210px] bg-pink-salmon border-pink-salmon rounded-md  h-11 text-white hover:bg-white hover:text-pink-salmon transition ease-in-out delay-50 font-bold"
+                >
+                  Adicionar
+                </button>
+              )}
             </div>
           </div>
         </div>

@@ -6,6 +6,7 @@ import { Id } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { useRegister } from "../hooks/useRegister";
 import { AxiosError } from "axios";
+import Loading from "./Loading";
 
 interface FormRegisterProps {
   emmitErrorToast: (message: string, duration: number) => Id;
@@ -28,7 +29,7 @@ const FormRegister = ({ emmitErrorToast }: FormRegisterProps) => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<registerFormInputs>({
     resolver: zodResolver(registerFormSchema),
   });
@@ -123,16 +124,25 @@ const FormRegister = ({ emmitErrorToast }: FormRegisterProps) => {
           autoComplete="off"
           {...register("confirmPassword")}
         />
-        <Button
-          onClick={() => {
-            {
-              handleErrors();
+        {isSubmitting ? (
+          <Button
+            onClick={() => handleErrors()}
+            className="border w-full min-w-[300px] max-w-[430px] border-pink-salmon rounded-md  h-11 text-pink-salmon hover:bg-pink-salmon hover:text-white transition ease-in-out delay-50"
+            type="submit"
+            content={
+              <div className="flex items-center justify-center w-full">
+                <Loading width="28px" height="28px" />
+              </div>
             }
-          }}
-          className="border w-full min-w-[300px] max-w-[430px] border-pink-salmon rounded-md  h-11 text-pink-salmon hover:bg-pink-salmon hover:text-white transition ease-in-out delay-50"
-          type="submit"
-          content="Criar"
-        />
+          />
+        ) : (
+          <Button
+            onClick={() => handleErrors()}
+            className="border w-full min-w-[300px] max-w-[430px] border-pink-salmon rounded-md  h-11 text-pink-salmon hover:bg-pink-salmon hover:text-white transition ease-in-out delay-50"
+            type="submit"
+            content="Criar"
+          />
+        )}
       </form>
     </>
   );

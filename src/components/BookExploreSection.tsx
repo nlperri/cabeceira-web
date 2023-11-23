@@ -4,10 +4,12 @@ import { useSearchBooks } from "../hooks/useSearchBooks";
 import { BookVolumeData } from "../@types/bookVolume.type";
 import BookExplore from "./BookExplore";
 import InfiniteScroll from "react-infinite-scroll-component";
+import Loading from "./Loading";
 
 const BookExploreSection = () => {
   const [inputValue, setInputValue] = useState("");
   const { searchBooks } = useSearchBooks();
+  const [isLoading, setIsLoading] = useState(true);
   const [books, setBooks] = useState<BookVolumeData[]>([]);
   const [page, setPage] = useState(1);
 
@@ -34,13 +36,14 @@ const BookExploreSection = () => {
     } catch (error) {
       console.error(error);
     }
-  }
+  };
   useEffect(() => {
     const searchBooksFromApi = async () => {
       try {
         const renderBook = inputValue.length === 0 ? "tecnologia" : inputValue;
         const searchedBooks = await searchBooks(renderBook, 1, 20);
         setBooks(searchedBooks);
+        setIsLoading(false);
         setPage(1);
       } catch (error) {
         console.error(error);
@@ -49,7 +52,9 @@ const BookExploreSection = () => {
     searchBooksFromApi();
   }, []);
 
-  return (
+  return isLoading ? (
+    <Loading width="50px" height="50px" />
+  ) : (
     books.length > 0 && (
       <section className="w-[80%] flex flex-col items-center mt-5 ">
         <div className="relative max-w-[400px] w-[80%]">
@@ -74,9 +79,9 @@ const BookExploreSection = () => {
           next={fetchMoreData}
           hasMore={true}
           loader={
-            <h4 className="p-10 w-full text-center text-blue-950 text-xl font-bold">
-              Loading...
-            </h4>
+            <div className="p-10 w-full text-center">
+              <Loading width="30px" height="30px" />
+            </div>
           }
         >
           <div className="w-8/12 mb-16 mt-10">
@@ -84,7 +89,10 @@ const BookExploreSection = () => {
               Principais livros
             </h1>
           </div>
-          <section id="searchResult" className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-y-20 gap-x-20">
+          <section
+            id="searchResult"
+            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-y-20 gap-x-20"
+          >
             {books.map((book, id) => {
               return <BookExplore key={id} book={book} />;
             })}
@@ -96,18 +104,3 @@ const BookExploreSection = () => {
 };
 
 export default BookExploreSection;
-
-// onError={()=>{altCover}}
-// src={book.volumeInfo.imageLinks.smallThumbnail}
-
-{
-  /* <div className="h-[290px] flex items-center">
-        <img className=" w-[180px]" src={book.cover} alt={book.title} />
-      </div>
-      <div className="flex flex-col gap-1 items-center">
-        <p className="">{book.title.substring(0, 20) + "..."}</p>
-        <p className="text-sm text-dark-blue uppercase">
-          {book.authors[0].name}
-        </p>
-      </div> */
-}

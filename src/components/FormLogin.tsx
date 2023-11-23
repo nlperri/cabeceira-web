@@ -6,6 +6,7 @@ import { Id } from "react-toastify";
 import { useLogin } from "../hooks/useLogin";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
+import Loading from "./Loading";
 
 interface FormLoginProps {
   emmitErrorToast: (message: string, duration: number) => Id;
@@ -26,7 +27,7 @@ const FormLogin = ({ emmitErrorToast }: FormLoginProps) => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<loginFormInputs>({
     resolver: zodResolver(loginFormSchema),
   });
@@ -68,12 +69,25 @@ const FormLogin = ({ emmitErrorToast }: FormLoginProps) => {
         {...register("password")}
       />
 
-      <Button
-        onClick={() => handleErrors()}
-        className="border w-full min-w-[300px] max-w-[430px] border-pink-salmon rounded-md  h-11 text-pink-salmon hover:bg-pink-salmon hover:text-white transition ease-in-out delay-50"
-        type="submit"
-        content="Acessar"
-      />
+      {isSubmitting ? (
+        <Button
+          onClick={() => handleErrors()}
+          className="border w-full min-w-[300px] max-w-[430px] border-pink-salmon rounded-md  h-11 text-pink-salmon hover:bg-pink-salmon hover:text-white transition ease-in-out delay-50"
+          type="submit"
+          content={
+            <div className="flex items-center justify-center w-full">
+              <Loading width="28px" height="28px" />
+            </div>
+          }
+        />
+      ) : (
+        <Button
+          onClick={() => handleErrors()}
+          className="border w-full min-w-[300px] max-w-[430px] border-pink-salmon rounded-md  h-11 text-pink-salmon hover:bg-pink-salmon hover:text-white transition ease-in-out delay-50"
+          type="submit"
+          content="Acessar"
+        />
+      )}
     </form>
   );
 };

@@ -6,6 +6,7 @@ import { ModalContext } from "../contexts/ModalContext";
 import BookShelfDetails from "../components/BookshelfDetails";
 import { sectionsData } from "../lib/sectionsData";
 import { useToast } from "../hooks/useToast";
+import Loading from "../components/Loading";
 
 const Home = () => {
   const { books, isLoading } = useContext(BookContext);
@@ -30,7 +31,7 @@ const Home = () => {
             );
           })
         ) : (
-          <p>Loading...</p>
+          <Loading width="50px" height="50px" />
         )}
       </main>
       {isOpen && (

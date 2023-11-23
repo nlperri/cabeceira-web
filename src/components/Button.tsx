@@ -1,6 +1,6 @@
 interface ButtonProps {
   className: string;
-  content: string;
+  content: string | React.ReactNode;
   type: "button" | "reset" | "submit" | undefined;
   disabled?: boolean;
   onClick: () => void;

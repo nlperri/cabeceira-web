@@ -14,6 +14,7 @@ import { BookContext } from "../contexts/BookContext";
 import { useUpdateBook } from "../hooks/useUpdateBook";
 import { useFetchBooks } from "../hooks/useFetchBooks";
 import DeleteBookModal from "./DeleteBookModal";
+import Loading from "./Loading";
 
 interface BookShelfDetailsProps {
   handleSetIsOpen: () => void;
@@ -46,7 +47,11 @@ const BookShelfDetails = ({
 
   type updateBookInputs = z.infer<typeof updateBookSchema>;
 
-  const { register, handleSubmit } = useForm<updateBookInputs>({
+  const {
+    register,
+    handleSubmit,
+    formState: { isSubmitting },
+  } = useForm<updateBookInputs>({
     resolver: zodResolver(updateBookSchema),
   });
 
@@ -151,12 +156,23 @@ const BookShelfDetails = ({
                       })}
                     </select>
                   </div>
-                  <button
-                    type="submit"
-                    className="border w-[210px] bg-pink-salmon border-pink-salmon rounded-md  h-11 text-white hover:bg-white hover:text-pink-salmon transition ease-in-out delay-50 font-bold"
-                  >
-                    Atualizar leitura
-                  </button>
+                  {isSubmitting ? (
+                    <button
+                      type="submit"
+                      className="border w-[210px] bg-pink-salmon border-pink-salmon rounded-md  h-11 text-white hover:bg-white hover:text-pink-salmon transition ease-in-out delay-50 font-bold"
+                    >
+                      <div className="flex items-center justify-center w-full">
+                        <Loading width="28px" height="28px" />
+                      </div>
+                    </button>
+                  ) : (
+                    <button
+                      type="submit"
+                      className="border w-[210px] bg-pink-salmon border-pink-salmon rounded-md  h-11 text-white hover:bg-white hover:text-pink-salmon transition ease-in-out delay-50 font-bold"
+                    >
+                      Atualizar leitura
+                    </button>
+                  )}
                 </div>
                 <div className="w-full flex justify-center p-2 mt-4">
                   <img
