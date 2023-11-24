@@ -21,5 +21,6 @@ jobs:
 
     - name: Run E2E Tests in Docker
       run: |
-        docker pull cypress/included:12.12.0
-        docker run -v $(pwd):/e2e -w /e2e cypress/included:12.12.0
+        docker pull cypress/included:12.12.0                             
+        docker run -it --entrypoint=cypress cypress/included:12.12.0 info
+        docker run -it -v $PWD:/e2e -w /e2e cypress/included:12.12.0     
