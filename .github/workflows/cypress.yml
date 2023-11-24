@@ -31,5 +31,4 @@ jobs:
     - name: Run E2E Tests
       uses: cypress-io/github-action@v4
       with:
-        command: npx cypress run
-        browser: chrome
+        command: npx cypress run --browser chrome --headed
