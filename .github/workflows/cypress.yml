@@ -25,4 +25,4 @@ jobs:
 
     - name: Run E2E Tests
       run: |
-        npx cypress run
+        npx cypress run --browser chrome
