@@ -8,6 +8,8 @@ on:
 jobs:
   e2e-tests:
     runs-on: ubuntu-latest
+    timeout-minutes: 15  
+
 
     steps:
     - name: Checkout Frontend Repository
@@ -32,4 +34,3 @@ jobs:
       uses: cypress-io/github-action@v4
       with:
         command: npx cypress run --browser chrome --no-headed --timeout 60000 --config chromeWebSecurity=false
-        timeout-minutes: 5
