@@ -22,8 +22,7 @@ jobs:
     - name: Use Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: '18.15.0'  # Update to the Node.js version used in your local environment
-
+        node-version: '18.15.0'  
     - name: Install Dependencies
       run: |
         npm install
