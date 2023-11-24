@@ -30,4 +30,4 @@ jobs:
     - name: Run E2E Tests
       uses: cypress-io/github-action@v4
       with:
-        command: npx cypress run --browser chrome --headed --timeout 60000
+        command: npx cypress run --browser chrome --no-headed --timeout 60000
