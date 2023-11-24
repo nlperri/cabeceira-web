@@ -28,14 +28,14 @@ jobs:
       run: |
         npm install
 
+    - name: Run E2E Tests
+      uses: cypress-io/github-action@v4
+      with:
+        command: npx cypress run --browser chrome --headed
+        
     - name: Debug Information
       run: |
         node --version
         npm --version
         npx --version
         echo "Cypress Version: $(npx -q cypress --version)"
-
-    - name: Run E2E Tests
-      uses: cypress-io/github-action@v4
-      with:
-        command: npx cypress run --browser chrome --headed --timeout 60000
