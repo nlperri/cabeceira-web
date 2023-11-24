@@ -1,5 +1,4 @@
 import { z } from "zod";
-import Button from "./Button";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Id } from "react-toastify";
@@ -70,23 +69,23 @@ const FormLogin = ({ emmitErrorToast }: FormLoginProps) => {
       />
 
       {isSubmitting ? (
-        <Button
+        <button
           onClick={() => handleErrors()}
           className="border w-full min-w-[300px] max-w-[430px] border-pink-salmon rounded-md  h-11 text-pink-salmon hover:bg-pink-salmon hover:text-white transition ease-in-out delay-50"
           type="submit"
-          content={
-            <div className="flex items-center justify-center w-full">
-              <Loading width="28px" height="28px" />
-            </div>
-          }
-        />
+        >
+          <div className="flex items-center justify-center w-full">
+            <Loading width="28px" height="28px" />
+          </div>
+        </button>
       ) : (
-        <Button
+        <button
           onClick={() => handleErrors()}
           className="border w-full min-w-[300px] max-w-[430px] border-pink-salmon rounded-md  h-11 text-pink-salmon hover:bg-pink-salmon hover:text-white transition ease-in-out delay-50"
           type="submit"
-          content="Acessar"
-        />
+        >
+          Acessar
+        </button>
       )}
     </form>
   );
