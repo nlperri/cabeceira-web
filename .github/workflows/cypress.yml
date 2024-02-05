@@ -19,7 +19,8 @@ jobs:
         repository: JoaoVitorSantDrade/cypress-cabeceira
         ref: main 
 
-    - name: Build and Run E2E Tests Docker Image
-      run: |
-        docker build -t cypress-e2e-tests:latest .
-        docker run cypress-e2e-tests:latest
+    - name: Pull Cypress Docker image
+      run: docker pull --quiet cypress/included:12.12.0
+
+    - name: Run E2E Tests in Docker
+      run: docker run -v $(pwd):/e2e -w /e2e cypress/included:12.12.0
