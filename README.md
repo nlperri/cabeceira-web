@@ -1,14 +1,13 @@
-# Cabeceira Web - Aplicativo de Gerenciamento de Livros
+# AgileLife - Jogo Multiplayer Web de Gerenciamento de Projetos Ágeis
 
 ## Descrição Geral
 
-O Cabeceira Web é a interface do usuário para o aplicativo de gerenciamento de livros Cabeceira API. Essa aplicação web permite aos usuários interagirem de forma intuitiva com sua biblioteca pessoal, visualizando, adicionando e gerenciando livros.
+AgileLife é um emocionante jogo multiplayer web que simula o ambiente de um projeto ágil de desenvolvimento de software. O jogo permite aos participantes mergulharem em um ambiente simulado onde enfrentam desafios comuns encontrados em equipes ágeis de desenvolvimento de software.
 
-**Deploy:** [cabeceira-web](https://cabeceira-web.vercel.app/)
 
-**Link para o Cabeceira API (Backend):** [cabeceira-api](https://github.com/nlperri/cabeceira-api)
+**Deploy:** [agile-life](https://main-agile-life-web.onrender.com/)
 
-**Repositório e2e cypress:** [cypress-cabeceira](https://github.com/JoaoVitorSantDrade/cypress-cabeceira)
+**Link para o Backend:** [back-end](https://github.com/ProjetosParceiros/agilelife-backend)
 
 ### Tecnologias Utilizadas
 
@@ -16,8 +15,6 @@ O Cabeceira Web é a interface do usuário para o aplicativo de gerenciamento de
 - **Vite**: Build tool para desenvolvimento rápido.
 - **React Router Dom**: Roteamento para Single Page Applications.
 - **Axios**: Cliente HTTP para realizar chamadas à API.
-- **React Hook Form**: Biblioteca para lidar com formulários React.
-- **Zod**: Biblioteca para validação de dados.
 
 ### Versões das Dependências no package.json
 
@@ -25,8 +22,6 @@ O Cabeceira Web é a interface do usuário para o aplicativo de gerenciamento de
 - Vite: 4.4.5
 - React Router Dom: 6.18.0
 - Axios: 1.6.1
-- React Hook Form: 7.48.2
-- Zod: 3.22.4
 
 ## Como Contribuir
 
@@ -56,20 +51,18 @@ A aplicação estará disponível em `http://localhost:5173`.
 
 Execute o seguinte comando para construir a imagem Docker:
 ```bash
-    docker build -t cabeceira-web .
+    docker build -t agile-life-web .
 ```
 
 Após a construção da imagem, execute o seguinte comando para iniciar o contêiner:
 
 ```bash
-    docker run -p 8080:80 cabeceira-web
+    docker run -p 8080:80 agile-life-web
 ```
 
 
 A aplicação estará disponível em `http://localhost:8080`.
 
 ## 
-
-**Nota:** Este projeto está em constante desenvolvimento. Se encontrar algum problema ou tiver sugestões, sinta-se à vontade para contribuir ou abrir uma issue.
 
 
