@@ -1,13 +1,11 @@
-# AgileLife - Jogo Multiplayer Web de Gerenciamento de Projetos Ágeis
+# Cabeceira Web - Aplicativo de Gerenciamento de Livros
 
 ## Descrição Geral
 
-AgileLife é um emocionante jogo multiplayer web que simula o ambiente de um projeto ágil de desenvolvimento de software. O jogo permite aos participantes mergulharem em um ambiente simulado onde enfrentam desafios comuns encontrados em equipes ágeis de desenvolvimento de software.
+O Cabeceira Web é a interface do usuário para o aplicativo de gerenciamento de livros Cabeceira API. Essa aplicação web permite aos usuários interagirem de forma intuitiva com sua biblioteca pessoal, visualizando, adicionando e gerenciando livros.
 
 
-**Deploy:** [agile-life](https://main-agile-life-web.onrender.com/)
-
-**Link para o Backend:** [back-end](https://github.com/ProjetosParceiros/agilelife-backend)
+**Link para o Cabeceira API (Backend):** [nlperri/cabeceira-api](https://github.com/nlperri/cabeceira-api)
 
 ### Tecnologias Utilizadas
 
@@ -15,6 +13,8 @@ AgileLife é um emocionante jogo multiplayer web que simula o ambiente de um pro
 - **Vite**: Build tool para desenvolvimento rápido.
 - **React Router Dom**: Roteamento para Single Page Applications.
 - **Axios**: Cliente HTTP para realizar chamadas à API.
+- **React Hook Form**: Biblioteca para lidar com formulários React.
+- **Zod**: Biblioteca para validação de dados.
 
 ### Versões das Dependências no package.json
 
@@ -22,6 +22,8 @@ AgileLife é um emocionante jogo multiplayer web que simula o ambiente de um pro
 - Vite: 4.4.5
 - React Router Dom: 6.18.0
 - Axios: 1.6.1
+- React Hook Form: 7.48.2
+- Zod: 3.22.4
 
 ## Como Contribuir
 
@@ -51,13 +53,13 @@ A aplicação estará disponível em `http://localhost:5173`.
 
 Execute o seguinte comando para construir a imagem Docker:
 ```bash
-    docker build -t agile-life-web .
+    docker build -t cabeceira-web .
 ```
 
 Após a construção da imagem, execute o seguinte comando para iniciar o contêiner:
 
 ```bash
-    docker run -p 8080:80 agile-life-web
+    docker run -p 8080:80 cabeceira-web
 ```
 
 
